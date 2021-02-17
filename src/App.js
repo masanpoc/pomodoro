@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { Session } from './components/Session';
+import { Break } from './components/Break';
+import { Display } from './components/Display';
+import { TimeProvider } from './context/GlobalContext';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TimeProvider>
+      <div className="App">
+        <h1 className='title'>My Pomodoro Timer</h1>
+        <div className='stages' >
+          <Session id='session' />
+          <Break id='break' />
+        </div>
+        <Display />
+      </div>
+    </TimeProvider>
   );
 }
 

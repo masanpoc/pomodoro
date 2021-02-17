@@ -1,0 +1,251 @@
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+$column-gap: 60px;
+
+@mixin cover {
+    height: 100vh;
+    margin: 0;
+    @include flex-column;
+    gap: $column-gap;
+    // overflow: hidden;
+}
+
+$row-gap: 80px;
+
+
+.App {
+    background: url('./pictures/library.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    @include cover;
+    text-align: center;
+
+    // * {
+    //     border: 1px solid black;
+    // }
+
+    .title {
+        animation: 
+            nudge 1s linear,
+            fadeIn 2s ease;
+        font-size: 2.5em;
+        font-style: italic;
+        font-weight: bold;
+        padding: 15px 25px;
+        background-color: rgba(255, 255, 255, 0.712);
+        box-shadow: 0 0 1rem 0 rgba($color: #000000, $alpha: 0.5);
+        box-shadow: 0 0 1rem 0 rgba($color: #000000, $alpha: 0.5);
+        position: relative;
+        // we want the background to remain the size of the body
+        background: inherit;            
+        // hiding the excess blur
+        overflow: hidden;
+        z-index: 1;
+    }
+    .title:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        // adding shadow inset
+        box-shadow: inset 0 0 1000px rgba($color: rgb(255, 255, 255), $alpha: 0.7);
+        // blurring the sudo element
+        filter: blur(5px);
+        // adding the background
+        background: inherit;
+        // making the sudo element bigger
+        margin: -10px;
+        // in case we do not see the content --> to make the content above the glass
+        z-index: -1;
+    }
+    
+
+    .stages {
+        animation: fadeIn ease 2s;
+        color: rgb(255, 255, 255);
+        width: 100%;
+        @include flex-row;
+        gap: $row-gap;
+        background: inherit;
+        .stage {
+            @include flex-column;
+            gap: 10px;
+            padding: 20px 50px;
+            border-radius: 10px;
+            > * {
+                margin: 0;
+            }
+            .arrow {
+                width: 24px;
+                height: 24px;
+                border: none;
+                color: rgb(255, 255, 255);
+            }
+            .arrow:hover {
+                // color: black;
+                transform: scale(1.5);
+                transition: 0.2s ease-in-out;
+            }
+            box-shadow: 2.5px -2.5px 0.1rem 0 rgba($color: #ffffff, $alpha: 0.5);
+            position: relative;
+            // we want the background to remain the size of the body
+            background: inherit;
+            // hiding the excess blur
+            overflow: hidden;
+            z-index: 1;
+        }
+        .stage:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            // adding shadow inset
+            box-shadow: inset 0 0 200px rgba($color: rgb(0, 0, 0), $alpha: 1);
+            // blurring the sudo element
+            filter: blur(20px);
+            // adding the background
+            background: inherit;
+            // making the sudo element bigger
+            margin: -10px;
+            // in case we do not see the content --> to make the content above the glass
+            z-index: -1;
+        }
+        .stage:hover {
+            transform: scale(1.05);
+            transition: 1s ease-in-out;
+        }
+    }
+    
+    .display {
+        animation: turn 1s linear;
+        @include flex-column();
+        gap: 20px;
+        color: rgba(0, 0, 0, 1);
+        font-weight: bold;
+        font-size: 1.2em;
+        padding: 35px 60px;
+        border-radius: 15px;
+        > * {
+            margin: 0;
+        }
+        .time-left {
+            color: rgb(255, 115, 0);
+        }
+        .standard {
+            color:rgb(0, 0, 0);
+        }
+        .controls {
+            @include flex-row();
+            gap: 10px;
+            .control {
+                width: 40px;
+                height: 40px;
+                border: none;
+                color: rgba(43, 43, 43, 0.747);
+            }
+            .control:hover {
+                color: black;
+                transform: scale(1.05);
+                transition: 0.5s ease-in-out;
+            }
+        }
+        box-shadow: 0 0 1rem 0 rgba($color: #000000, $alpha: 0.5);
+        position: relative;
+        // we want the background to remain the size of the body
+        background: inherit;            
+        // hiding the excess blur
+        overflow: hidden;
+        z-index: 1;
+    }
+    .display:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        // adding shadow inset
+        box-shadow: inset 0 0 1000px rgba($color: rgb(255, 255, 255), $alpha: 0.7);
+        // blurring the sudo element
+        filter: blur(10px);
+        // adding the background
+        background: inherit;
+        // making the sudo element bigger
+        margin: -20px;
+        // in case we do not see the content --> to make the content above the glass
+        z-index: -1;
+    }
+    .display:hover {
+        transform: scale(1.05);
+        transition: 0.5s ease-in-out;
+    }
+}
+
+// #break {
+//     padding: 20px;
+// }
+
+
+
+
+
+button {
+    background: none;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+
+@keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+}
+
+@keyframes nudge {
+    0% {
+      transform: translate(-500px, 0);
+    }
+    
+    100% {
+      transform: translate(0, 0);
+    }
+}
+
+@keyframes turn {
+    0% {
+      transform: scale(0.001) rotate(300deg);
+    }
+    
+    70% {
+      transform: scale(0.8) rotate(0);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+}
